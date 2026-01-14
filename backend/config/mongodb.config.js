@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const mongoDBConfig = async () => {
   try {
-    const mongoURI = process.env.MONGO_URL;
+    const mongoURI = process.env.MONGODB_URI || process.env.MONGO_URL;
 
     const options = {
       serverSelectionTimeoutMS: 5000,
