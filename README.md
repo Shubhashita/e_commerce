@@ -60,7 +60,33 @@ Start the frontend application:
 npm start
 ```
 
-## 🔐 Sample Test Credentials
+## � Deployment Guide
+
+### Backend (Render)
+1. **New Web Service**: Connect your GitHub repository.
+2. **Root Directory**: Set to `backend`.
+3. **Build Command**: `npm install`
+4. **Start Command**: `npm start`
+5. **Environment Variables**:
+   - `MONGODB_URI`: Your MongoDB Atlas connection string.
+   - `JWT_SECRET`: A long random string.
+   - `ALLOWED_ORIGINS`: `["https://your-frontend-url.vercel.app"]` (Add your Vercel URL here).
+   - `PORT`: `5000` (Render will override this, but good to have).
+
+### Frontend (Vercel)
+1. **New Project**: Connect your GitHub repository.
+2. **Framework Preset**: Create React App.
+3. **Root Directory**: Set to `frontend`.
+4. **Environment Variables**:
+   - `REACT_APP_API_URL`: Your Render backend URL (e.g., `https://your-backend.onrender.com`).
+5. **Redirects**: If using React Router, add a `vercel.json` in the `frontend` root:
+   ```json
+   {
+     "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+   }
+   ```
+
+## �🔐 Sample Test Credentials
 
 Use these credentials to test the platform functionality:
 
