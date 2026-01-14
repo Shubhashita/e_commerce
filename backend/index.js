@@ -35,9 +35,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Connect to MongoDB
-mongoDBConfig();
-
 // Routes
 app.get('/health', (req, res) => {
     return res.json({ message: "Hello from E-Commerce API, server is running 🏃‍♀️" });
@@ -46,9 +43,21 @@ app.get('/health', (req, res) => {
 // app Routes
 app.use('/', router);
 
-const server = app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Connect to MongoDB & Start Server
+const startServer = async () => {
+    try {
+        await mongoDBConfig();
+        server = app.listen(PORT, () => {
+            console.log(`🚀 Server is running on http://localhost:${PORT}`);
+        });
+    } catch (err) {
+        console.error("❌ Failed to start server:", err.message);
+        process.exit(1);
+    }
+};
+
+let server;
+startServer();
 const mongoose = require('mongoose');
 
 const gracefulShutdown = () => {
